@@ -15,8 +15,8 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
 
             // Проверяем размер
-            Assert.AreEqual(10, matrix.GetLength(0)); // 1 заголовок + 9 данных
-            Assert.AreEqual(8, matrix.GetLength(1));  // 8 столбцов
+            Assert.AreEqual(15, matrix.GetLength(0)); 
+            Assert.AreEqual(12, matrix.GetLength(1)); 
 
             // Проверяем заголовки
             Assert.AreEqual("mode of the transport", matrix[0, 0]);
@@ -28,11 +28,8 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             int result = ds.GetBusCount(matrix);
-
-            // В файле: строки 2,3,5,8,10 - это автобусы
-            Assert.AreEqual(5, result);
+            Assert.AreEqual(7, result);
         }
 
         [TestMethod]
@@ -40,11 +37,8 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             int result = ds.GetMinibusCount(matrix);
-
-            // В файле: строки 4,6,7,9 - это маршрутки
-            Assert.AreEqual(4, result);
+            Assert.AreEqual(7, result);
         }
 
         [TestMethod]
@@ -52,11 +46,8 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             int result = ds.GetRoutesWithChargerCount(matrix);
-
-            // Все автобусы (5 шт) имеют "есть"
-            Assert.AreEqual(5, result);
+            Assert.AreEqual(8, result);
         }
 
         [TestMethod]
@@ -64,10 +55,7 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             int result = ds.GetMinTravelTime(matrix);
-
-            // Минимальное время: 40 минут (маршрут 62)
             Assert.AreEqual(40, result);
         }
 
@@ -76,11 +64,8 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             int result = ds.GetMaxTravelTime(matrix);
-
-            // Максимальное время: 124 минуты (маршрутка 45)
-            Assert.AreEqual(124, result);
+            Assert.AreEqual(182, result);
         }
 
         [TestMethod]
@@ -88,11 +73,8 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             double result = ds.GetAverageTravelTime(matrix);
-
-            // Среднее: (73+85+124+40+56+89+44+82+94)/9 = 76.33
-            double wait = 76.33;
+            double wait = 84.07;
             Assert.AreEqual(wait, result);
 
         }
@@ -100,10 +82,7 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             double result = ds.GetTotalDailyTravelTime(matrix);
-
-            // Среднее: (73+85+124+40+56+89+44+82+94)/9 = 76.33
             double wait = 76.33;
             Assert.AreEqual(wait, result);
 
@@ -113,11 +92,8 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             int result = ds.GetTotalPassengersPerDay(matrix);
-
-            // Сумма пассажиров: 2343+1765+1032+2607+967+1143+1967+1478+2058 = 15360
-            int expected = 15360;
+            int expected = 28507;
             Assert.AreEqual(expected, result);
         }
         [TestMethod]
@@ -127,9 +103,7 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
 
             double result = ds.GetAveragePassengersPerDay(matrix);
-
-            // Среднее пассажиров: 15360/9 = 1706.67
-            double expected = 1706.67;
+            double expected = 2036.21;
             Assert.AreEqual(expected, result);
         }
         [TestMethod]
@@ -137,12 +111,42 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Test
         {
             DataService ds = new DataService();
             string[,] matrix = ds.LoadFromDataFile(testFilePath);
-
             int result = ds.GetRoutesWithChargerCount(matrix);
-
-            // Все автобусы (5 шт) имеют "есть"
+            Assert.AreEqual(8, result);
+        }
+        [TestMethod]
+        public void TestGetRoutesWithLargeClassBus()
+        {
+            DataService ds = new DataService();
+            string[,] matrix = ds.LoadFromDataFile(testFilePath);
+            int result = ds.GetRoutesWithLargeClassBus(matrix);
             Assert.AreEqual(5, result);
         }
+        [TestMethod]
+        public void TestGetRoutesWorkssOnWeekends()
+        {
+            DataService ds = new DataService();
+            string[,] matrix = ds.LoadFromDataFile(testFilePath);
+            int result = ds.GetRoutesWorkssOnWeekends(matrix);
+            Assert.AreEqual(10, result);
+        }
+        [TestMethod]
+        public void TestGetRoutesWithWheelchairRamps()
+        {
+            DataService ds = new DataService();
+            string[,] matrix = ds.LoadFromDataFile(testFilePath);
+            int result = ds.GetRoutesWithWheelchairRamp(matrix);
+            Assert.AreEqual(9, result);
+        }
+        [TestMethod]
+        public void TestGetRoutesWithPaymentForSBPSystem()
+        {
+            DataService ds = new DataService();
+            string[,] matrix = ds.LoadFromDataFile(testFilePath);
+            int result = ds.GetRoutesWithPaymentForSBPSystem(matrix);
+            Assert.AreEqual(7, result);
+        }
+
 
     }
 }

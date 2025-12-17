@@ -151,6 +151,41 @@ namespace Tyuiu.MakarovAY.Sprint7.V14.Lib
             }
             return count;
         }
-
+        public int GetRoutesWithLargeClassBus(string[,] matrix)
+        {
+            int count = 0;
+            for (int i = 1; i < matrix.GetLength(0); i++)
+            {
+                if (matrix[i, 8].ToLower() == "да") { count = count + 1; }
+            }
+            return count;
+        }
+        public int GetRoutesWorkssOnWeekends(string[,] matrix)
+        {
+            int count = 0;
+            for (int i = 1; i < matrix.GetLength(0); i++)
+            {
+                if (matrix[i, 9].ToLower() == "да") { count = count + 1; }
+            }
+            return count;
+        }
+        public int GetRoutesWithWheelchairRamp(string[,] matrix)
+        {
+            int count = 0;
+            for (int i = 1; i < matrix.GetLength(0); i++)
+            {
+                if (matrix[i, 10].ToLower() == "да") { count = count + 1; }
+            }
+            return count;
+        }
+        public int GetRoutesWithPaymentForSBPSystem(string[,] matrix)
+        {
+            int count = 0;
+            for (int i = 1; i < matrix.GetLength(0); i++)
+            {
+                if (matrix[i, 11].ToLower() == "да") { count = count + 1; }
+            }
+            return count;
+        }
     }
 }
