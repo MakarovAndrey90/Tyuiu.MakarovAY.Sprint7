@@ -233,6 +233,7 @@
             button1.TabIndex = 2;
             toolTip2.SetToolTip(button1, "добавить или удалить информацию из файла, сохранить");
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label3
             // 
@@ -348,6 +349,7 @@
             textBoxModeOfTheTransport_MAY.ReadOnly = true;
             textBoxModeOfTheTransport_MAY.Size = new Size(151, 27);
             textBoxModeOfTheTransport_MAY.TabIndex = 1;
+            textBoxModeOfTheTransport_MAY.TextChanged += textBoxModeOfTheTransport_MAY_TextChanged;
             // 
             // labelPaymentForSBPSystem_MAY
             // 

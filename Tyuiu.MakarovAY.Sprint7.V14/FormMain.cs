@@ -43,11 +43,11 @@ namespace Tyuiu.MakarovAY.Sprint7.V14
                 matrix = ds.LoadFromDataFile(path);
                 comboBoxShowNum_MAY.Items.Clear();
                 for (int i = 1; i < matrix.GetLength(0); i++)
-                { 
+                {
                     comboBoxShowNum_MAY.Items.Add(matrix[i, 1]);
                 }
                 buttonDone_MAY.Enabled = true;
-                MessageBox.Show($"Файл загружен!\nНайдено маршрутов: {matrix.GetLength(0) - 1}","Успех",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show($"Файл загружен!\nНайдено маршрутов: {matrix.GetLength(0) - 1}", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch
             {
@@ -79,8 +79,8 @@ namespace Tyuiu.MakarovAY.Sprint7.V14
                         textBoxWorksOnWeekends_MAY.Text = matrix[i, 9];
                         textBoxWheelchairRamp_MAY.Text = matrix[i, 10];
                         textBoxPaymentForSBPSystem_MAY.Text = matrix[i, 11];
-                        textBoxStart_MAY.Text += matrix[i, 3];
-                        textBoxStop_MAY.Text += matrix[i, 4];
+                        textBoxStart_MAY.Text = matrix[i, 3];
+                        textBoxStop_MAY.Text = matrix[i, 4];
                     }
                 }
             }
@@ -102,6 +102,17 @@ namespace Tyuiu.MakarovAY.Sprint7.V14
         }
 
         private void textBoxPaymentForSBPSystem_MAY_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormRedact formRedact = new FormRedact();
+            formRedact.ShowDialog();
+        }
+
+        private void textBoxModeOfTheTransport_MAY_TextChanged(object sender, EventArgs e)
         {
 
         }
